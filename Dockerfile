@@ -137,6 +137,10 @@ RUN chmod +x /usr/local/bin/config.sh \
 # Copy configuration files
 COPY --chown=1000:1000 extensions.conf models.conf /app/
 
+# Convert CRLF to LF for configuration files
+RUN sed -i 's/\r$//' /app/extensions.conf && \
+    sed -i 's/\r$//' /app/models.conf
+
 # Switch back to ubuntu user for running the application
 USER 1000
 
